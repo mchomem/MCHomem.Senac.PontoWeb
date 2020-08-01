@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCHomem.Senac.PontoWeb.WebAPI", "MCHomem.Senac.PontoWeb.WebAPI\MCHomem.Senac.PontoWeb.WebAPI.csproj", "{C70309E4-0B8D-4909-A22B-0AD9AAB196E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCHomem.Senac.PontoWeb.Models", "MCHomem.Senac.PontoWeb.Models\MCHomem.Senac.PontoWeb.Models.csproj", "{C12C21B0-F636-493E-A148-08BA888B2D61}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C70309E4-0B8D-4909-A22B-0AD9AAB196E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C70309E4-0B8D-4909-A22B-0AD9AAB196E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C70309E4-0B8D-4909-A22B-0AD9AAB196E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C70309E4-0B8D-4909-A22B-0AD9AAB196E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C12C21B0-F636-493E-A148-08BA888B2D61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C12C21B0-F636-493E-A148-08BA888B2D61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C12C21B0-F636-493E-A148-08BA888B2D61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C12C21B0-F636-493E-A148-08BA888B2D61}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F944A2E0-271A-48C9-A606-87D82A696678}
+	EndGlobalSection
+EndGlobal
