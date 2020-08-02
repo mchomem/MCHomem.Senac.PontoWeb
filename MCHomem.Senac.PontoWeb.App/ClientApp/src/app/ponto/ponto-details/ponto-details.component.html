@@ -1,0 +1,43 @@
+<form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+  <h1>Marcação de ponto</h1>
+
+  <div class="row">
+    <div class="col-12 col-sm-2 col-md-3 col-lg-3 col-xl-3">
+      <div class="form-group">
+        <label>Colaborador</label>
+        <select name="selColaborador" class="custom-select">
+          <option>Selecione</option>
+          <option *ngFor="let colaborador of serviceColaborador.list"
+                  value="{{ colaborador.ID }}">
+            {{ colaborador.Nome }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-sm-2 col-md-3 col-lg-3 col-xl-3">
+      <div class="form-group">
+        <label>Operação (entrada/saída)</label>
+        <select class="custom-select">
+          <option value="E">Entrada</option>
+          <option value="S">Saída</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-sm-2 col-md-3 col-lg-3 col-xl-3">
+      <div class="form-group">
+        <button id="btnSend"
+                class="btn btn-primary btn-block"
+                type="submit">
+          Marcar
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

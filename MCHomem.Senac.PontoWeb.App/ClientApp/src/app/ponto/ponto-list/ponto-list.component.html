@@ -1,0 +1,47 @@
+<h1>Relatório ponto</h1>
+
+<div class="row">
+  <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+    <div class="form-group">
+      <label>Colaborador</label>
+      <div class="input-group mb-3">
+        <select name="selColaborador" class="custom-select">
+          <option>Selecione</option>
+          <option *ngFor="let colaborador of serviceColaborador.list"
+                  value="{{ colaborador.ID }}">
+            {{ colaborador.Nome }}
+          </option>
+        </select>
+        <div class="input-group-append">
+          <button id="btnSearch"
+                  class="btn btn-primary btn-sm"
+                  type="button">
+            Pesquisar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Data</th>
+          <th>Operação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ponto of servicePonto.list">
+          <td>{{ ponto.ID }}</td>
+          <td>{{ ponto.DataHoraRegistroPonto }}</td>
+          <td>{{ ponto.IndicadorEntradaSaida }}</td>
+        </tr>
+      </tbody>
+      <tfoot></tfoot>
+    </table>
+  </div>
+</div>

@@ -4,47 +4,27 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace MCHomem.Senac.PontoWeb.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class PontoController : ControllerBase
     {
-        // GET: api/<PontoController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
         // GET: api/<ColaboradorController>/colaborador-ponto
         [HttpGet]
         [Route("/api/[controller]/ponto")]
         public IEnumerable<Ponto> GetPontoColaborador([FromBody] Ponto ponto)
         {
-            return new PontoRepository().Retreave(ponto);
-        }
-
-        // GET api/<PontoController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
+            return new PontoRepository()
+                .Retreave(ponto);
         }
 
         // POST api/<PontoController>
         [HttpPost]
         public void Post([FromBody] Ponto ponto)
         {
-            new PontoRepository().Insert(ponto);
-        }
-
-        // PUT api/<PontoController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
+            new PontoRepository()
+                .Insert(ponto);
         }
 
         // DELETE api/<PontoController>/5

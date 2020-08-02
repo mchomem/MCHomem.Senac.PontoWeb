@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Text.Json;
 
 namespace MCHomem.Senac.PontoWeb.WebAPI
 {
@@ -22,14 +24,31 @@ namespace MCHomem.Senac.PontoWeb.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
             services.AddDbContext<PontoContext>
                 (
                     options => options
                         .UseSqlServer(Configuration.GetConnectionString("DevConnection"))
                 );
 
-            services.AddCors();
+            // Enable cors to cross origin.
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.WithOrigins
+                    (
+                        Configuration.GetValue<String>("urlClient")
+                        , "http://localhost:65431" // TODO get server info in variables
+                    );
+                });
+            });
+
+            // Config output json to PascalCase.
+            services.AddControllers()
+                .AddJsonOptions
+                (
+                    option => option.JsonSerializerOptions.PropertyNamingPolicy = null
+                );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,9 +60,8 @@ namespace MCHomem.Senac.PontoWeb.WebAPI
             }
 
             app.UseRouting();
-
+            app.UseCors();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
