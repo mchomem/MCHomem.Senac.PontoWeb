@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MCHomem.Senac.PontoWeb.Models.Migrations
 {
     [DbContext(typeof(PontoContext))]
-    [Migration("20200801065257_InitDB")]
+    [Migration("20200803225709_InitDB")]
     partial class InitDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -67,7 +67,7 @@ namespace MCHomem.Senac.PontoWeb.Models.Migrations
             modelBuilder.Entity("MCHomem.Senac.PontoWeb.Models.Entities.Ponto", b =>
                 {
                     b.HasOne("MCHomem.Senac.PontoWeb.Models.Entities.Colaborador", "Colaborador")
-                        .WithMany()
+                        .WithMany("Pontos")
                         .HasForeignKey("ColaboradorID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

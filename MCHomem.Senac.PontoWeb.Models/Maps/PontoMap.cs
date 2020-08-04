@@ -17,6 +17,10 @@ namespace MCHomem.Senac.PontoWeb.Models.Maps
                 .HasKey(x => x.ID);
 
             modelBuilder
+                .Property(x => x.ColaboradorID)
+                .IsRequired();
+
+            modelBuilder
                 .Property(x => x.DataHoraRegistroPonto)
                 .HasColumnType("datetimeoffset")
                 .IsRequired();
@@ -26,6 +30,12 @@ namespace MCHomem.Senac.PontoWeb.Models.Maps
                 .HasColumnType("nvarchar")
                 .HasMaxLength(1)
                 .IsRequired();
+
+            // Fk pointing out to Colaborador.
+            modelBuilder
+                .HasOne<Colaborador>(p => p.Colaborador)
+                .WithMany(c => c.Pontos)
+                .HasForeignKey(p => p.ColaboradorID);
         }
 
         #endregion

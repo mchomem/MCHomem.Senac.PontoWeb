@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace MCHomem.Senac.PontoWeb.Models.Entities
 {
@@ -10,7 +9,7 @@ namespace MCHomem.Senac.PontoWeb.Models.Entities
 
         public Int32? ID { get; set; }
 
-        [Required]
+        public Guid ColaboradorID { get; set; }
         public Colaborador Colaborador { get; set; }
 
         public DateTimeOffset? DataHoraRegistroPonto { get; set; }

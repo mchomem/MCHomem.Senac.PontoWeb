@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace MCHomem.Senac.PontoWeb.Models.Entities
 {
@@ -12,6 +14,9 @@ namespace MCHomem.Senac.PontoWeb.Models.Entities
         public Guid? ID { get; set; }
 
         public String Nome { get; set; }
+
+        [JsonIgnore]
+        public ICollection<Ponto> Pontos { get; set; }
 
         #endregion
     }

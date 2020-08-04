@@ -65,7 +65,7 @@ namespace MCHomem.Senac.PontoWeb.Models.Migrations
             modelBuilder.Entity("MCHomem.Senac.PontoWeb.Models.Entities.Ponto", b =>
                 {
                     b.HasOne("MCHomem.Senac.PontoWeb.Models.Entities.Colaborador", "Colaborador")
-                        .WithMany()
+                        .WithMany("Pontos")
                         .HasForeignKey("ColaboradorID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

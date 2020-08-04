@@ -72,18 +72,18 @@ namespace MCHomem.Senac.PontoWeb.Models.Repositories
                         .ToList();
 
                 // Filters.
-                pontos =
-                    pontos
+                pontos = pontos
                         .Where
-                            (c =>
-                                (!entity.ID.HasValue || c.ID.Value.Equals(entity.ID.Value))
-                                && (entity.Colaborador == null || c.Colaborador.Nome.Contains(entity.Colaborador.Nome))
-                                && (!entity.DataHoraRegistroPonto.HasValue ||
-                                    (
-                                        c.DataHoraRegistroPonto.Value.Month.Equals(entity.DataHoraRegistroPonto.Value.Month)
-                                        && c.DataHoraRegistroPonto.Value.Year.Equals(entity.DataHoraRegistroPonto.Value.Year))
-                                    )
-                                && (!entity.IndicadorEntradaSaida.HasValue || c.IndicadorEntradaSaida.Equals(entity.IndicadorEntradaSaida))
+                            (
+                                p =>
+                                    (!entity.ID.HasValue || p.ID.Value.Equals(entity.ID.Value))
+                                    && ((entity.Colaborador == null || entity.Colaborador.Nome == null) || p.Colaborador.Nome.Contains(entity.Colaborador.Nome))
+                                    && (!entity.DataHoraRegistroPonto.HasValue ||
+                                        (
+                                            p.DataHoraRegistroPonto.Value.Month.Equals(entity.DataHoraRegistroPonto.Value.Month)
+                                            && p.DataHoraRegistroPonto.Value.Year.Equals(entity.DataHoraRegistroPonto.Value.Year))
+                                        )
+                                    && (!entity.IndicadorEntradaSaida.HasValue || p.IndicadorEntradaSaida.Equals(entity.IndicadorEntradaSaida))
                             )
                             .OrderBy(p => p.DataHoraRegistroPonto.Value.Day)
                                 .ToList();
