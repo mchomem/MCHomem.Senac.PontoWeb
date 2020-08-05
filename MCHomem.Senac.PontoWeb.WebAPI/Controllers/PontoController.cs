@@ -10,6 +10,17 @@ namespace MCHomem.Senac.PontoWeb.WebAPI.Controllers
     [ApiController]
     public class PontoController : ControllerBase
     {
+        [HttpGet]
+        [Route("/api/[controller]/ponto-colaborador")]
+        public IEnumerable<Ponto> GetPontoColaborador(Guid colaboradorID)
+        {
+            Colaborador colaborador = new Colaborador();
+            colaborador.ID = colaboradorID;
+
+            return new PontoRepository()
+                .Retreave(new Ponto() { Colaborador = colaborador });
+        }
+
         // GET: api/<ColaboradorController>/colaborador-ponto
         [HttpGet]
         [Route("/api/[controller]/ponto")]

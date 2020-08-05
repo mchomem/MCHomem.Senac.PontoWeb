@@ -77,6 +77,7 @@ namespace MCHomem.Senac.PontoWeb.Models.Repositories
                             (
                                 p =>
                                     (!entity.ID.HasValue || p.ID.Value.Equals(entity.ID.Value))
+                                    && ((entity.Colaborador == null || entity.Colaborador.ID == null) || p.Colaborador.ID.Equals(entity.Colaborador.ID))
                                     && ((entity.Colaborador == null || entity.Colaborador.Nome == null) || p.Colaborador.Nome.Contains(entity.Colaborador.Nome))
                                     && (!entity.DataHoraRegistroPonto.HasValue ||
                                         (

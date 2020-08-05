@@ -10,13 +10,25 @@ import { ColaboradorService } from '../../services/colaborador.service';
 })
 export class PontoListComponent implements OnInit {
 
+  public ponto = {} as PontoModel;
   public pontos: PontoModel[]
+  public colaboradorID: string
 
   constructor(private servicePonto: PontoService, private serviceColaborador: ColaboradorService) { }
 
-  ngOnInit(): void {
-    this.servicePonto.getPontos();
+  ngOnInit(): void {    
     this.serviceColaborador.getColaboradores();
+  }
+
+  onOptionsSelected(value: string) {
+    this.colaboradorID = value;
+  }
+
+  getPontoColaborador() {
+
+    this.servicePonto.getPonto(this.colaboradorID).subscribe((pontos: PontoModel[]) => {
+      this.pontos = pontos;
+    });
   }
 
 }

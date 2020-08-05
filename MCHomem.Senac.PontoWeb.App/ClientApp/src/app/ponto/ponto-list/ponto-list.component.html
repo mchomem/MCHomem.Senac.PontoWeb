@@ -5,7 +5,11 @@
     <div class="form-group">
       <label>Colaborador</label>
       <div class="input-group mb-3">
-        <select name="selColaborador" class="custom-select">
+        <select
+                name="selColaborador"
+                class="custom-select"
+                #selColaborador
+              (change)="onOptionsSelected(selColaborador.value)">
           <option>Selecione</option>
           <option *ngFor="let colaborador of serviceColaborador.list"
                   value="{{ colaborador.ID }}">
@@ -15,7 +19,8 @@
         <div class="input-group-append">
           <button id="btnSearch"
                   class="btn btn-primary btn-sm"
-                  type="button">
+                  type="button"
+                  (click)="getPontoColaborador()">
             Pesquisar
           </button>
         </div>
@@ -35,7 +40,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let ponto of servicePonto.list">
+        <tr *ngFor="let ponto of pontos">
           <td>{{ ponto.ID }}</td>
           <td>{{ ponto.DataHoraRegistroPonto }}</td>
           <td>{{ ponto.IndicadorEntradaSaida }}</td>
