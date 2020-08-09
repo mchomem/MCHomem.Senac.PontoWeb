@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ColaboradorModel } from '../models/colaborador-model';
+import { Colaborador } from '../models/colaborador-model';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -7,9 +7,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ColaboradorService {
 
-  colaborador: ColaboradorModel;
+  colaborador: Colaborador;
   readonly backendUrl = 'http://localhost:65431';
-  list: ColaboradorModel[];
+  list: Colaborador[];
 
   constructor(private http: HttpClient) { }
 
@@ -17,6 +17,6 @@ export class ColaboradorService {
     this.http
       .get(this.backendUrl + '/api/colaborador/all')
       .toPromise()
-      .then(res => this.list = res as ColaboradorModel[]);
+      .then(res => this.list = res as Colaborador[]);
   }
 }

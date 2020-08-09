@@ -1,8 +1,8 @@
-import { ColaboradorModel } from "./colaborador-model";
+import { Colaborador } from "./colaborador-model";
 
-export class PontoModel {
+export class Ponto {
   ID: number;
-  Colaborador: ColaboradorModel;
-  DataHoraRegistroPonto: string;
+  Colaborador: Colaborador;
+  DataHoraRegistroPonto: Date;
   IndicadorEntradaSaida: string;
 }

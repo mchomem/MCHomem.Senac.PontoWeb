@@ -33,13 +33,16 @@ namespace MCHomem.Senac.PontoWeb.WebAPI
             // Enable cors to cross origin.
             services.AddCors(options =>
             {
-                options.AddDefaultPolicy(builder =>
+                options.AddPolicy("CorsPolicy", builder =>
                 {
                     builder.WithOrigins
                     (
                         Configuration.GetValue<String>("urlClient")
                         , "http://localhost:65431" // TODO get server info in variables
-                    );
+                    )
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
                 });
             });
 
@@ -73,8 +76,8 @@ namespace MCHomem.Senac.PontoWeb.WebAPI
             });
 
             app.UseRouting();
-            app.UseCors();
             app.UseAuthorization();
+            app.UseCors("CorsPolicy");
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

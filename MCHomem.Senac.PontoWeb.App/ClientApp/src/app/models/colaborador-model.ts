@@ -1,4 +1,4 @@
-export class ColaboradorModel {
+export class Colaborador {
   ID: string
   Nome: string
 }

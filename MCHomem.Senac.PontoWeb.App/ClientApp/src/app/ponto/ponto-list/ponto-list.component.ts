@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PontoModel } from '../../models/ponto-model';
+import { Ponto } from '../../models/ponto-model';
 import { PontoService } from '../../services/ponto.service';
 import { ColaboradorService } from '../../services/colaborador.service';
 
@@ -10,8 +10,8 @@ import { ColaboradorService } from '../../services/colaborador.service';
 })
 export class PontoListComponent implements OnInit {
 
-  public ponto = {} as PontoModel;
-  public pontos: PontoModel[]
+  public ponto = {} as Ponto;
+  public pontos: Ponto[]
   public colaboradorID: string
 
   constructor(private servicePonto: PontoService, private serviceColaborador: ColaboradorService) { }
@@ -26,9 +26,10 @@ export class PontoListComponent implements OnInit {
 
   getPontoColaborador() {
 
-    this.servicePonto.getPonto(this.colaboradorID).subscribe((pontos: PontoModel[]) => {
-      this.pontos = pontos;
-    });
+    this
+      .servicePonto
+      .getPonto(this.colaboradorID)
+      .subscribe((pontos: Ponto[]) => { this.pontos = pontos; });
   }
 
 }

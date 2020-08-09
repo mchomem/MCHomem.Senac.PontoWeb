@@ -1,4 +1,4 @@
-<form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+<form id="add-form" (ngSubmit)="f.form.valid && savePonto(f)" #f="ngForm" novalidate>
 
   <h1>Marcação de ponto</h1>
 
@@ -6,10 +6,14 @@
     <div class="col-12 col-sm-2 col-md-3 col-lg-3 col-xl-3">
       <div class="form-group">
         <label>Colaborador</label>
-        <select name="selColaborador" class="custom-select">
-          <option>Selecione</option>
-          <option *ngFor="let colaborador of serviceColaborador.list"
-                  value="{{ colaborador.ID }}">
+        <select id="selColaborador"
+                class="custom-select"
+                [(ngModel)]="ponto.Colaborador"
+                name="Colaborador"
+                #Colaborador="ngModel">
+          <option [ngValue]="undefined" selected>Selecione</option>
+          <option *ngFor="let colaborador of serviceColaborador.list; let i = index"
+                  [ngValue]="colaborador">
             {{ colaborador.Nome }}
           </option>
         </select>
@@ -21,9 +25,15 @@
     <div class="col-12 col-sm-2 col-md-3 col-lg-3 col-xl-3">
       <div class="form-group">
         <label>Operação (entrada/saída)</label>
-        <select class="custom-select">
-          <option value="E">Entrada</option>
-          <option value="S">Saída</option>
+        <select id="selOperacoes"
+                class="custom-select"
+                [(ngModel)]="ponto.IndicadorEntradaSaida"
+                #IndicadorEntradaSaida="ngModel"
+                name="IndicadorEntradaSaida">
+          <option *ngFor="let operacao of operacoes"
+                  [value]="operacao.abreviacao">
+            {{ operacao.descricao }}
+          </option>
         </select>
       </div>
     </div>

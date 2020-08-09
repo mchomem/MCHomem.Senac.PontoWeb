@@ -23,7 +23,6 @@ namespace MCHomem.Senac.PontoWeb.WebAPI.Controllers
 
         // GET: api/<ColaboradorController>/colaborador-ponto
         [HttpGet]
-        [Route("/api/[controller]/ponto")]
         public IEnumerable<Ponto> GetPontoColaborador([FromBody] Ponto ponto)
         {
             return new PontoRepository()
