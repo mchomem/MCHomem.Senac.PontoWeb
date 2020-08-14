@@ -3,6 +3,8 @@ using MCHomem.Senac.PontoWeb.Models.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace MCHomem.Senac.PontoWeb.WebAPI.Controllers
 {
@@ -12,37 +14,46 @@ namespace MCHomem.Senac.PontoWeb.WebAPI.Controllers
     {
         [HttpGet]
         [Route("/api/[controller]/ponto-colaborador")]
-        public IEnumerable<Ponto> GetPontoColaborador(Guid colaboradorID)
+        public async Task<IEnumerable<Ponto>> GetPontoColaborador(Guid colaboradorID)
         {
             Colaborador colaborador = new Colaborador();
             colaborador.ID = colaboradorID;
 
-            return new PontoRepository()
-                .Retreave(new Ponto() { Colaborador = colaborador });
+            List<Ponto> pontos = new PontoRepository().Retreave(new Ponto() { Colaborador = colaborador });
+            TaskCompletionSource<IEnumerable<Ponto>> tsc = new TaskCompletionSource<IEnumerable<Ponto>>();
+            tsc.SetResult(pontos);
+            return await tsc.Task;
         }
 
-        // GET: api/<ColaboradorController>/colaborador-ponto
         [HttpGet]
-        public IEnumerable<Ponto> GetPontoColaborador([FromBody] Ponto ponto)
+        public async Task<IEnumerable<Ponto>> GetPontoColaborador([FromBody] Ponto ponto)
         {
-            return new PontoRepository()
-                .Retreave(ponto);
+            List<Ponto> pontos = new PontoRepository().Retreave(ponto);
+            TaskCompletionSource<IEnumerable<Ponto>> tsc = new TaskCompletionSource<IEnumerable<Ponto>>();
+            tsc.SetResult(pontos);
+            return await tsc.Task;
         }
 
-        // POST api/<PontoController>
         [HttpPost]
-        public void Post([FromBody] Ponto ponto)
+        public async Task<HttpResponseMessage> Post([FromBody] Ponto ponto)
         {
-            new PontoRepository()
-                .Insert(ponto);
+            HttpResponseMessage response = new HttpResponseMessage();
+            new PontoRepository().Insert(ponto);
+            response = new HttpResponseMessage(System.Net.HttpStatusCode.Created);
+            TaskCompletionSource<HttpResponseMessage> tsc = new TaskCompletionSource<HttpResponseMessage>();
+            tsc.SetResult(response);
+            return await tsc.Task;
         }
 
-        // DELETE api/<PontoController>/5
         [HttpDelete("{id}")]
-        public void Delete(Int32 id)
+        public async Task<HttpResponseMessage> Delete(Int32 id)
         {
-            new PontoRepository()
-                .Delete(new Ponto() { ID = Convert.ToInt32(id)});
+            HttpResponseMessage response = new HttpResponseMessage();
+            new PontoRepository().Delete(new Ponto() { ID = Convert.ToInt32(id) });
+            response = new HttpResponseMessage(System.Net.HttpStatusCode.NoContent);
+            TaskCompletionSource<HttpResponseMessage> tsc = new TaskCompletionSource<HttpResponseMessage>();
+            tsc.SetResult(response);
+            return await tsc.Task;
         }
     }
 }

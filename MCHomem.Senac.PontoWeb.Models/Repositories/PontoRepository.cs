@@ -86,7 +86,7 @@ namespace MCHomem.Senac.PontoWeb.Models.Repositories
                                         )
                                     && (!entity.IndicadorEntradaSaida.HasValue || p.IndicadorEntradaSaida.Equals(entity.IndicadorEntradaSaida))
                             )
-                            .OrderBy(p => p.DataHoraRegistroPonto.Value.Day)
+                            .OrderByDescending(p => p.DataHoraRegistroPonto.Value)
                                 .ToList();
             }
 

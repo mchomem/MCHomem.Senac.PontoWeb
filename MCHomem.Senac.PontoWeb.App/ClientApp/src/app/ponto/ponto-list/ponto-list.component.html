@@ -5,11 +5,10 @@
     <div class="form-group">
       <label>Colaborador</label>
       <div class="input-group mb-3">
-        <select
-                name="selColaborador"
+        <select name="selColaborador"
                 class="custom-select"
                 #selColaborador
-              (change)="onOptionsSelected(selColaborador.value)">
+                (change)="onOptionsSelected(selColaborador.value)">
           <option>Selecione</option>
           <option *ngFor="let colaborador of serviceColaborador.list"
                   value="{{ colaborador.ID }}">
@@ -42,8 +41,8 @@
       <tbody>
         <tr *ngFor="let ponto of pontos">
           <td>{{ ponto.ID }}</td>
-          <td>{{ ponto.DataHoraRegistroPonto | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
-          <td>{{ ponto.IndicadorEntradaSaida }}</td>          
+          <td>{{ ponto.DataHoraRegistroPonto | date: 'dd/MM/yyyy HH:mm:ss - EEE' }}</td>
+          <td>{{ ponto.IndicadorEntradaSaida }}</td>
         </tr>
         <tr *ngIf="pontos==null || pontos.length === 0">
           <td colspan="3">

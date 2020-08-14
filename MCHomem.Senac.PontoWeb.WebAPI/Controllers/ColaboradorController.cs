@@ -3,6 +3,9 @@ using MCHomem.Senac.PontoWeb.Models.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace MCHomem.Senac.PontoWeb.WebAPI.Controllers
 {
@@ -19,42 +22,59 @@ namespace MCHomem.Senac.PontoWeb.WebAPI.Controllers
 
         [HttpGet]
         [Route("/api/[controller]/all")]
-        public IEnumerable<Colaborador> GetAll()
+        public async Task<IEnumerable<Colaborador>> GetAll()
         {
-            return new ColaboradorRepository()
-                .Retreave(new Colaborador());
+            List<Colaborador> colaboradores = new ColaboradorRepository().Retreave(new Colaborador());
+            TaskCompletionSource<IEnumerable<Colaborador>> tsc = new TaskCompletionSource<IEnumerable<Colaborador>>();
+            tsc.SetResult(colaboradores);
+            return await tsc.Task;
         }
 
         [HttpGet]
         [Route("/api/[controller]/colaborador")]
-        public IEnumerable<Colaborador> GetColaborador([FromBody] Colaborador colaborador)        
+        //public IEnumerable<Colaborador> GetColaborador([FromBody] Colaborador colaborador)        
+        public async Task<IEnumerable<Colaborador>> GetColaborador([FromBody] Colaborador colaborador)
         {
-            return new ColaboradorRepository()
-                .Retreave(colaborador);
+            List<Colaborador> colaboradores = new ColaboradorRepository().Retreave(colaborador);
+            TaskCompletionSource<IEnumerable<Colaborador>> tsc = new TaskCompletionSource<IEnumerable<Colaborador>>();
+            tsc.SetResult(colaboradores);
+            return await tsc.Task;
         }
 
         // POST api/<ColaboradorController>
         [HttpPost]
-        public void Post([FromBody] Colaborador colaborador)
+        public async Task<HttpResponseMessage> Post([FromBody] Colaborador colaborador)
         {
-            new ColaboradorRepository()
-                .Insert(colaborador);
+            HttpResponseMessage response = new HttpResponseMessage();
+            new ColaboradorRepository().Insert(colaborador);
+            response = new HttpResponseMessage(HttpStatusCode.Created);
+            TaskCompletionSource<HttpResponseMessage> tsc = new TaskCompletionSource<HttpResponseMessage>();
+            tsc.SetResult(response);
+            return await tsc.Task;
         }
 
         // PUT api/<ColaboradorController>/5
         [HttpPut]
-        public void Put([FromBody] Colaborador colaborador)
+        public async Task<HttpResponseMessage> Put([FromBody] Colaborador colaborador)
         {
-            new ColaboradorRepository()
-                .Update(colaborador);
+            HttpResponseMessage response = new HttpResponseMessage();
+            new ColaboradorRepository().Update(colaborador);
+            response = new HttpResponseMessage(HttpStatusCode.Created);
+            TaskCompletionSource<HttpResponseMessage> tsc = new TaskCompletionSource<HttpResponseMessage>();
+            tsc.SetResult(response);
+            return await tsc.Task;
         }
 
         // DELETE api/<ColaboradorController>/5
         [HttpDelete("{id}")]
-        public void Delete(String id)
+        public async Task<HttpResponseMessage> Delete(String id)
         {
-            new ColaboradorRepository()
-                .Delete(new Colaborador() { ID = Guid.Parse(id) });
+            HttpResponseMessage response = new HttpResponseMessage();
+            new ColaboradorRepository().Delete(new Colaborador() { ID = Guid.Parse(id) });
+            response = new HttpResponseMessage(HttpStatusCode.NoContent);
+            TaskCompletionSource<HttpResponseMessage> tsc = new TaskCompletionSource<HttpResponseMessage>();
+            tsc.SetResult(response);
+            return await tsc.Task;
         }
     }
 }
