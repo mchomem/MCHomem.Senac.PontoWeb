@@ -28,6 +28,10 @@
   </div>
 </div>
 
+<div class="row" *ngIf="pontos != undefined">
+  <div class="col mb-2">Registros encontrados: {{ pontos.length }}</div>
+</div>
+
 <div class="row">
   <div class="col">
     <table class="table table-striped table-sm">
@@ -41,8 +45,8 @@
       <tbody>
         <tr *ngFor="let ponto of pontos">
           <td>{{ ponto.ID }}</td>
-          <td>{{ ponto.DataHoraRegistroPonto | date: 'dd/MM/yyyy HH:mm:ss - EEE' }}</td>
-          <td>{{ ponto.IndicadorEntradaSaida }}</td>
+          <td>{{ ponto.DataHoraRegistroPonto | date: 'dd/MM/yyyy HH:mm:ss - EEE' | uppercase }}</td>
+          <td>{{ ponto.IndicadorEntradaSaida == 'E' ? 'Entrada' : 'Saída'}}</td>
         </tr>
         <tr *ngIf="pontos==null || pontos.length === 0">
           <td colspan="3">
